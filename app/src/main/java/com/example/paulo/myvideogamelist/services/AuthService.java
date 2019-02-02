@@ -1,27 +1,44 @@
 package com.example.paulo.myvideogamelist.services;
 
-import android.app.Service;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothClass;
 import android.content.Context;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
-import android.os.IBinder;
+
 
 import com.example.paulo.myvideogamelist.App;
 import com.example.paulo.myvideogamelist.models.User;
 import com.example.paulo.myvideogamelist.models.User_;
 
+import java.security.Provider;
+
 import io.objectbox.Box;
 
 
-public class AuthService extends Service {
+public class AuthService {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Box<User> userBox;
     User currentUser;
     public static final String USER_KEY = "user key";
 
-    public long getCurrentUserId() {
-            return pref.getLong(USER_KEY,(long) 0.23123);
+    public AuthService(){
+
+    }
+
+    public AuthService(Box<User> userBox, SharedPreferences pref) {
+        this.userBox = userBox;
+        this.pref = pref;
+        editor = this.pref.edit();
+    }
+
+    public User getCurrentUser() {
+        if (isLoggedIn()) {
+            return userBox.get(pref.getLong(USER_KEY, (long) 0.231232));
+        }
+        return null;
     }
     public void logOut(){
         currentUser = null;
@@ -33,10 +50,6 @@ public class AuthService extends Service {
         return !(currentUser == null);
     }
 
-
-    public AuthService() {
-
-    }
 
     public boolean authenticateUser(String username,String password){
         try {
@@ -50,18 +63,4 @@ public class AuthService extends Service {
 
 
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        userBox = ((App)getApplication()).getBoxStore().boxFor(User.class);
-        pref = getApplicationContext().getSharedPreferences("mypref",Context.MODE_PRIVATE);
-        editor = pref.edit();
-        return super.onStartCommand(intent, flags, startId);
-
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
 }

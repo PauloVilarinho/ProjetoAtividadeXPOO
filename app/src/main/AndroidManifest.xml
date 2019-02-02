@@ -22,11 +22,7 @@
         <activity
             android:name=".UserFormActivity"
             android:label="Create User" />
-
-        <service
-            android:name=".services.AuthService"
-            android:enabled="true"
-            android:exported="true"></service>
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
