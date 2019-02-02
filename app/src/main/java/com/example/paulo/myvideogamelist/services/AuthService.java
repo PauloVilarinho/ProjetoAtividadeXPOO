@@ -8,21 +8,44 @@ import android.os.IBinder;
 
 import com.example.paulo.myvideogamelist.App;
 import com.example.paulo.myvideogamelist.models.User;
+import com.example.paulo.myvideogamelist.models.User_;
 
 import io.objectbox.Box;
-import io.objectbox.BoxStore;
+
 
 public class AuthService extends Service {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Box<User> userBox;
+    User currentUser;
     public static final String USER_KEY = "user key";
+
+    public long getCurrentUserId() {
+            return pref.getLong(USER_KEY,(long) 0.23123);
+    }
+    public void logOut(){
+        currentUser = null;
+        editor.remove(USER_KEY);
+        editor.apply();
+    }
+
+    public boolean isLoggedIn(){
+        return !(currentUser == null);
+    }
+
+
     public AuthService() {
 
     }
 
-    public void authenticateUser(String username,String password){
-
+    public boolean authenticateUser(String username,String password){
+        try {
+            currentUser = userBox.query().equal(User_.username, username).equal(User_.password, password).build().findUnique();
+            editor.putLong(USER_KEY,currentUser.id);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
     }
 
 
