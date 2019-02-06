@@ -22,6 +22,7 @@ public class AuthService {
     SharedPreferences.Editor editor;
     Box<User> userBox;
     User currentUser;
+    long userId;
     public static final String USER_KEY = "user key";
 
     public AuthService(){
@@ -36,12 +37,13 @@ public class AuthService {
 
     public User getCurrentUser() {
         if (isLoggedIn()) {
-            return userBox.get(pref.getLong(USER_KEY, (long) 0.231232));
+            return userBox.get(userId);
         }
         return null;
     }
     public void logOut(){
         currentUser = null;
+        userId = Long.parseLong(null);
         editor.remove(USER_KEY);
         editor.apply();
     }
@@ -54,7 +56,8 @@ public class AuthService {
     public boolean authenticateUser(String username,String password){
         try {
             currentUser = userBox.query().equal(User_.username, username).equal(User_.password, password).build().findUnique();
-            editor.putLong(USER_KEY,currentUser.id);
+            userId = currentUser.id;
+            editor.putLong(USER_KEY,userId);
             return true;
         } catch (Exception e){
             return false;

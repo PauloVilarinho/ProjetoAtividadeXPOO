@@ -34,11 +34,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_add"
-            android:id="@+id/action_bar_forward"
+            android:id="@+id/action_bar_add"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            />
 
 
     </TableRow>
