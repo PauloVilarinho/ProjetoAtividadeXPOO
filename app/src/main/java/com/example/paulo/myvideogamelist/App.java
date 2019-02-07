@@ -8,6 +8,7 @@ import android.util.Log;
 import com.example.paulo.myvideogamelist.models.MyObjectBox;
 import com.example.paulo.myvideogamelist.models.User;
 import com.example.paulo.myvideogamelist.services.AuthService;
+import com.example.paulo.myvideogamelist.services.DataBaseService;
 
 import io.objectbox.BoxStore;
 import io.objectbox.android.AndroidObjectBrowser;
@@ -16,6 +17,7 @@ public class App extends Application {
 
     public SharedPreferences pref;
     public AuthService authService;
+    public DataBaseService dataBaseService;
 
     private BoxStore boxStore;
 
@@ -29,6 +31,8 @@ public class App extends Application {
         pref = getApplicationContext().getSharedPreferences("mypref",Context.MODE_PRIVATE);
         authService = new AuthService(boxStore.boxFor(User.class),pref);
 
+        dataBaseService = new DataBaseService(getAuthService(),getBoxStore());
+
         Log.d("App", "Using ObjectBox " + BoxStore.getVersion() + " (" + BoxStore.getVersionNative() + ")");
     }
 
@@ -38,5 +42,9 @@ public class App extends Application {
 
     public AuthService getAuthService() {
         return authService;
+    }
+
+    public DataBaseService getDataBaseService() {
+        return dataBaseService;
     }
 }
