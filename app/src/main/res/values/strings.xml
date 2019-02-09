@@ -7,4 +7,9 @@
     <string name="sing_in">Sing in</string>
     <string name="list_title">List Title</string>
     <string name="create_list">Create List</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_game">Add Game</string>
 </resources>

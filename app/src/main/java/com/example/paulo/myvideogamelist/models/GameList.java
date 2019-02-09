@@ -37,4 +37,8 @@ public class GameList {
     public void setUser(User user) {
         this.user.setTarget(user);
     }
+
+    public long getId() {
+        return id;
+    }
 }

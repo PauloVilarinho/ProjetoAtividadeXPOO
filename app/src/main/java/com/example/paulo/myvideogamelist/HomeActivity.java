@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -14,12 +16,16 @@ public class HomeActivity extends AppCompatActivity {
 
     ImageButton buttonAdd;
     RecyclerView rvList;
+    App app;
+    LinearLayoutManager linearLayoutManager;
+    GameListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        app = (App)getApplication();
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -31,12 +37,24 @@ public class HomeActivity extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), com.example.paulo.myvideogamelist.ListFormActivity.class);
+                Intent intent = new Intent(v.getContext(), ListFormActivity.class);
                 startActivity(intent);
             }
         });
 
         rvList = findViewById(R.id.listRecyclerView);
+        linearLayoutManager =  new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        adapter = new GameListAdapter(app.getDataBaseService(),this,app.getAuthService().getCurrentUser());
+        rvList.setAdapter(adapter);
+        rvList.setLayoutManager(linearLayoutManager);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.setLists(app.getDataBaseService().getAllCurrentUserLists());
+        adapter.notifyDataSetChanged();
+        rvList.setAdapter(adapter);
 
     }
 }
