@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,6 +96,9 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
                 v.getContext().startActivity(intent);
             }
         });
+
+        gameListViewHolder.gamesRV.setLayoutManager(new LinearLayoutManager(context));
+        gameListViewHolder.gamesRV.setAdapter(new GameAdapter(dataBaseService.getAllGamesInAList(list),context,dataBaseService));
 
     }
 
