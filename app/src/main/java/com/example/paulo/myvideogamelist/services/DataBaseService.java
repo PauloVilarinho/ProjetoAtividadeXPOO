@@ -1,5 +1,6 @@
 package com.example.paulo.myvideogamelist.services;
 
+import com.example.paulo.myvideogamelist.models.Game;
 import com.example.paulo.myvideogamelist.models.GameList;
 import com.example.paulo.myvideogamelist.models.GameList_;
 import com.example.paulo.myvideogamelist.models.ListGame;
@@ -21,6 +22,7 @@ public class DataBaseService {
     Box<GameList> gameListBox;
     Box<User> userBox;
     Box<ListGame> listGameBox;
+    Box<Game> gameBox;
 
 
     public DataBaseService(AuthService authService, BoxStore boxStore) {
@@ -29,6 +31,7 @@ public class DataBaseService {
         this.gameListBox = boxStore.boxFor(GameList.class);
         this.userBox = boxStore.boxFor(User.class);
         this.listGameBox = boxStore.boxFor(ListGame.class);
+        this.gameBox = boxStore.boxFor(Game.class);
     }
 
 
@@ -46,5 +49,9 @@ public class DataBaseService {
         listGameBox.remove(listGamesRelation);
         gameListBox.remove(gameList);
 
+    }
+
+    public List<Game> getAllGames (){
+       return gameBox.query().build().find();
     }
 }

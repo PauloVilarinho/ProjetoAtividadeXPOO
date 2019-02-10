@@ -15,6 +15,7 @@ import com.example.paulo.myvideogamelist.adapters.GameListAdapter;
 public class HomeActivity extends AppCompatActivity {
 
     ImageButton buttonAdd;
+    ImageButton buttonSearch;
     RecyclerView rvList;
     App app;
     LinearLayoutManager linearLayoutManager;
@@ -27,6 +28,19 @@ public class HomeActivity extends AppCompatActivity {
 
         app = (App)getApplication();
 
+        setupActionBar();
+        setupRecyclerView();
+    }
+
+    private void setupRecyclerView() {
+        rvList = findViewById(R.id.listRecyclerView);
+        linearLayoutManager =  new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        adapter = new GameListAdapter(app.getDataBaseService(),this,app.getAuthService().getCurrentUser());
+        rvList.setAdapter(adapter);
+        rvList.setLayoutManager(linearLayoutManager);
+    }
+
+    private void setupActionBar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
@@ -42,11 +56,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        rvList = findViewById(R.id.listRecyclerView);
-        linearLayoutManager =  new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        adapter = new GameListAdapter(app.getDataBaseService(),this,app.getAuthService().getCurrentUser());
-        rvList.setAdapter(adapter);
-        rvList.setLayoutManager(linearLayoutManager);
+        buttonSearch = view.findViewById(R.id.action_bar_search);
+
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ListGamesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

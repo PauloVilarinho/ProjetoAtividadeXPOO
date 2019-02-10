@@ -66,7 +66,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
     @Override
     public GameListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(com.example.paulo.myvideogamelist.R.layout.item_list_layout,viewGroup,false);
+        View view = inflater.inflate(R.layout.item_list_layout,viewGroup,false);
 
         GameListViewHolder viewHolder = new GameListViewHolder(view);
         return viewHolder;
@@ -113,12 +113,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
 
         public GameListViewHolder(@NonNull View itemView) {
             super(itemView);
-
             listTitle = itemView.findViewById(R.id.listItemTitle);
             gamesRV = itemView.findViewById(R.id.gameRecyclerView);
             deleteButton = itemView.findViewById(R.id.deleteListButton);
             editButton = itemView.findViewById(R.id.editListButton);
-            addGameButton = itemView.findViewById(R.id.addGameButton);
 
         }
     }

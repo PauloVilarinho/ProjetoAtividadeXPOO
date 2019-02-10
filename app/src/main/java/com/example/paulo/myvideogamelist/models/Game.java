@@ -18,6 +18,11 @@ public class Game {
     public Game() {
     }
 
+    public Game(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     public Game(String title, String description, Date releaseDate) {
         this.title = title;
         this.description = description;
