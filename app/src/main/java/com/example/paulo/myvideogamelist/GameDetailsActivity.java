@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.paulo.myvideogamelist.adapters.GameListAdapter;
 import com.example.paulo.myvideogamelist.models.Game;
 import com.example.paulo.myvideogamelist.models.GameList;
 import com.example.paulo.myvideogamelist.models.ListGame;
@@ -37,31 +38,36 @@ public class GameDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_details);
+        setupServices();
+        setupBoxes();
+        getIntentData();
+        setupTextViews();
+    }
+
+    private void setupServices() {
         application = (App)getApplication();
         authService = application.getAuthService();
         dataBaseService = application.getDataBaseService();
+    }
 
+    private void setupBoxes() {
         gameBox = application.getBoxStore().boxFor(Game.class);
         listGameBox = application.getBoxStore().boxFor(ListGame.class);
+    }
 
+    private void getIntentData() {
         Intent intent = getIntent();
         gameId = intent.getLongExtra("gameid",(long)123213123);
         game = gameBox.get(gameId);
+    }
 
+    private void setupTextViews() {
         gameTitle = findViewById(R.id.gameDetailTitle);
         gameDescription = findViewById(R.id.gameDetailDescription);
 
         gameTitle.setText(game.getTitle());
         gameDescription.setText(game.getDescription());
-
-
-
-
-
-
     }
-
-
 
 
     public void addToList(View view) {
@@ -103,5 +109,46 @@ public class GameDetailsActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void deleteGame(View view) {
+        createDeleteDialog();
+    }
+
+    private void createDeleteDialog() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setMessage("You are going to delete all data from that game. Are you sure?");
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dataBaseService.deleteGame(game);
+                dialog.dismiss();
+                finish();
+            }
+        });
+        android.app.AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public void editGame(View view) {
+
+        Intent intent = new Intent(this,GamesFormActivity.class);
+        intent.putExtra("gameid",game.id);
+        startActivity(intent);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        game = gameBox.get(gameId);
+        gameTitle.setText(game.getTitle());
+        gameDescription.setText(game.getDescription());
     }
 }

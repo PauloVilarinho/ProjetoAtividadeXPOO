@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 
 import com.example.paulo.myvideogamelist.GameDetailsActivity;
 import com.example.paulo.myvideogamelist.R;
@@ -28,6 +29,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
     Context context;
     DataBaseService dataBaseService;
     OnClickListener onClickListener;
+    OnLongClickListener onLongClickListener;
 
 
     public GameAdapter(List<Game> gameList, Context context, DataBaseService dataBaseService) {
@@ -65,10 +67,16 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
             }
         };
 
+        onLongClickListener = new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        };
+
         gameViewHolder.gameDescription.setText(game.getDescription());
         gameViewHolder.gameTitle.setText(game.getTitle());
-        gameViewHolder.gameTitle.setOnClickListener(onClickListener);
-        gameViewHolder.gameDescription.setOnClickListener(onClickListener);
+        gameViewHolder.view.setOnClickListener(onClickListener);
 
 
 
