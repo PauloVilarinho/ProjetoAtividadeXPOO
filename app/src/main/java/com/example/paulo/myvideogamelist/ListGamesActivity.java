@@ -65,7 +65,7 @@ public class ListGamesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        gameAdapter.setGameList(dataBaseService.getAllGames());
+        gameAdapter.setGames(dataBaseService.getAllGames());
         gameAdapter.notifyDataSetChanged();
         gamesRv.setAdapter(gameAdapter);
     }

@@ -98,7 +98,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.GameLi
         });
 
         gameListViewHolder.gamesRV.setLayoutManager(new LinearLayoutManager(context));
-        gameListViewHolder.gamesRV.setAdapter(new GameAdapter(dataBaseService.getAllGamesInAList(list),context,dataBaseService));
+        gameListViewHolder.gamesRV.setAdapter(new GameAdapter(dataBaseService.getAllGamesInAList(list),context,dataBaseService,list));
 
     }
 

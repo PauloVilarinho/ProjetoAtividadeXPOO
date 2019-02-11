@@ -62,6 +62,12 @@ public class DataBaseService {
         gameBox.remove(game);
     }
 
+    public void removeGameFromList(Game game,GameList gameList){
+        ListGame listGame = listGameBox.query().equal(ListGame_.gameId,game.id).equal(ListGame_.listId,gameList.getId()).build().findFirst();
+        listGameBox.remove(listGame);
+
+    }
+
     public void deleteGameList (GameList gameList){
 
         List<ListGame> listGamesRelation = listGameBox.query().equal(ListGame_.listId,gameList.getId()).build().find();
