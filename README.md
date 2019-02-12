@@ -46,6 +46,7 @@ O usuário ao entrar no aplicativo tem a capacidade de criar suas listas de jogo
 ## Persistência de dados
 Atualmente utilizando object box.
 ## Diagrama de Classe simplificado
+![](diagram.png	)
 ## Funcionalidades
 - Cadastrar novo usuário ou entrar em uma conta já existente;
 - Criar, editar e excluir uma lista;
@@ -56,5 +57,6 @@ Atualmente utilizando object box.
 - Aplicativo desenvolvido utilizando linguagem de programação Java;
 - Desenvolvido para no minimo sdk 23 do android.
 ## Storyboard de navegação
+![](Cell-Col-0-Row-0.png	)
 
 
