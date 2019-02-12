@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.paulo.myvideogamelist.adapters.GameListAdapter;
+import com.example.paulo.myvideogamelist.adapters.ReviewAdapter;
 import com.example.paulo.myvideogamelist.models.Game;
 import com.example.paulo.myvideogamelist.models.GameList;
 import com.example.paulo.myvideogamelist.models.ListGame;
+import com.example.paulo.myvideogamelist.models.Review;
 import com.example.paulo.myvideogamelist.services.AuthService;
 import com.example.paulo.myvideogamelist.services.DataBaseService;
 
@@ -30,9 +34,12 @@ public class GameDetailsActivity extends AppCompatActivity {
     App application;
     AuthService authService;
     DataBaseService dataBaseService;
+    RecyclerView reviewRV;
+    ReviewAdapter adapter;
 
     TextView gameTitle;
     TextView gameDescription;
+    TextView gameAverageScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,14 @@ public class GameDetailsActivity extends AppCompatActivity {
         setupBoxes();
         getIntentData();
         setupTextViews();
+        setupRecyclerView();
+    }
+
+    private void setupRecyclerView() {
+        reviewRV = findViewById(R.id.reviewRv);
+        reviewRV.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ReviewAdapter(dataBaseService.getAllReviewToGame(game),this,authService,dataBaseService);
+        reviewRV.setAdapter(adapter);
     }
 
     private void setupServices() {
@@ -64,9 +79,25 @@ public class GameDetailsActivity extends AppCompatActivity {
     private void setupTextViews() {
         gameTitle = findViewById(R.id.gameDetailTitle);
         gameDescription = findViewById(R.id.gameDetailDescription);
+        gameAverageScore = findViewById(R.id.gameDetailAverageScore);
+
 
         gameTitle.setText(game.getTitle());
         gameDescription.setText(game.getDescription());
+        float averageScore = getAverageScore();
+
+        gameAverageScore.setText(Float.toString(averageScore));
+
+    }
+
+    private float getAverageScore() {
+        List<Review> reviews = dataBaseService.getAllReviewToGame(game);
+        float averageScore = 0;
+        for (Review review : reviews){
+            averageScore += review.getReviewNote();
+        }
+        averageScore /= reviews.size();
+        return averageScore;
     }
 
 
@@ -150,5 +181,22 @@ public class GameDetailsActivity extends AppCompatActivity {
         game = gameBox.get(gameId);
         gameTitle.setText(game.getTitle());
         gameDescription.setText(game.getDescription());
+
+        adapter.setReviewList(dataBaseService.getAllReviewToGame(game));
+        adapter.notifyDataSetChanged();
+        reviewRV.setAdapter(adapter);
+
+        float averageScore = getAverageScore();
+
+        gameAverageScore.setText(Float.toString(averageScore));
+
+
+
+    }
+
+    public void createReview(View view) {
+        Intent intent = new Intent(this,ReviewFormActivity.class);
+        intent.putExtra("gameid",gameId);
+        startActivity(intent);
     }
 }

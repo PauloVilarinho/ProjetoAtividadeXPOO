@@ -6,6 +6,8 @@ import com.example.paulo.myvideogamelist.models.GameList_;
 import com.example.paulo.myvideogamelist.models.Game_;
 import com.example.paulo.myvideogamelist.models.ListGame;
 import com.example.paulo.myvideogamelist.models.ListGame_;
+import com.example.paulo.myvideogamelist.models.Review;
+import com.example.paulo.myvideogamelist.models.Review_;
 import com.example.paulo.myvideogamelist.models.User;
 import com.example.paulo.myvideogamelist.models.User_;
 
@@ -26,6 +28,7 @@ public class DataBaseService {
     Box<User> userBox;
     Box<ListGame> listGameBox;
     Box<Game> gameBox;
+    Box<Review> reviewBox;
 
 
     public DataBaseService(AuthService authService, BoxStore boxStore) {
@@ -35,6 +38,7 @@ public class DataBaseService {
         this.userBox = boxStore.boxFor(User.class);
         this.listGameBox = boxStore.boxFor(ListGame.class);
         this.gameBox = boxStore.boxFor(Game.class);
+        this.reviewBox = boxStore.boxFor(Review.class);
     }
 
 
@@ -68,11 +72,21 @@ public class DataBaseService {
 
     }
 
+    public void deleteReview (Review review){
+        reviewBox.remove(review);
+    }
+
     public void deleteGameList (GameList gameList){
 
         List<ListGame> listGamesRelation = listGameBox.query().equal(ListGame_.listId,gameList.getId()).build().find();
         listGameBox.remove(listGamesRelation);
         gameListBox.remove(gameList);
+
+    }
+
+    public List<Review> getAllReviewToGame(Game game){
+        QueryBuilder builder = reviewBox.query().equal(Review_.targetId,game.id);
+        return builder.build().find();
 
     }
 

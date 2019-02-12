@@ -5,6 +5,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.paulo.myvideogamelist.services.AuthService;
 
@@ -16,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout passwordInput;
     String username ;
     String password ;
+    ImageView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private void setViews() {
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
+
     }
 
 
