@@ -58,6 +58,8 @@ Atualmente utilizando object box.
 - Aplicativo desenvolvido utilizando linguagem de programação Java;
 - Desenvolvido para no minimo sdk 23 do android.
 ## Storyboard de navegação
+![](StoryBoard.png	)
+## Prints da Applicação atual
 ![](Cell-Col-0-Row-0.png	)
 
 
