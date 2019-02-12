@@ -46,7 +46,7 @@ O usuário ao entrar no aplicativo tem a capacidade de criar suas listas de jogo
 ## Persistência de dados
 Atualmente utilizando object box.
 ## Diagrama de Classe simplificado
-![](diagram.png	)
+![](diagram2.png	)
 ## Funcionalidades
 - Cadastrar novo usuário ou entrar em uma conta já existente;
 - Criar, editar e excluir uma lista;
