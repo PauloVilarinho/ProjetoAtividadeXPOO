@@ -35,6 +35,7 @@ Aplicativo para criar uma comunidade de reviews de jogos onde as pessoas podem e
     - getters e setters.
 - **Review**
   - Atributos
+    - id
     - reviewText
     - score
     - Game
