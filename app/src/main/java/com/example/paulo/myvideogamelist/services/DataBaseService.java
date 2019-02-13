@@ -44,6 +44,17 @@ public class DataBaseService {
         this.developerBox = boxStore.boxFor(Developer.class);
     }
 
+    public void populateDevelopers(){
+        if(developerBox.getAll().size() < 2) {
+            Developer developer1 = new Developer("test 1", "test 1");
+            Developer developer2 = new Developer("square", "square enix ");
+            Developer developer = new Developer("nintendo", "nintendo");
+
+            developerBox.put(developer);
+            developerBox.put(developer1);
+            developerBox.put(developer2);
+        }
+    }
 
     public List<GameList> getAllListByUser(User user){
         return gameListBox.query().equal(GameList_.userId,user.id).build().find();

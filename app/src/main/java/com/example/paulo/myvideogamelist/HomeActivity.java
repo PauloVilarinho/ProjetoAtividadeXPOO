@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 
 import com.example.paulo.myvideogamelist.adapters.GameListAdapter;
 import com.example.paulo.myvideogamelist.models.Developer;
+import com.example.paulo.myvideogamelist.services.DataBaseService;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     App app;
     LinearLayoutManager linearLayoutManager;
     GameListAdapter adapter;
+    DataBaseService dataBaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         app = (App)getApplication();
+        dataBaseService = app.getDataBaseService();
+        dataBaseService.populateDevelopers();
 
 
         setupActionBar();
