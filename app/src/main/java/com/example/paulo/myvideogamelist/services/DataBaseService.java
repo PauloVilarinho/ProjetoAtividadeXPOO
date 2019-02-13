@@ -1,5 +1,6 @@
 package com.example.paulo.myvideogamelist.services;
 
+import com.example.paulo.myvideogamelist.models.Developer;
 import com.example.paulo.myvideogamelist.models.Game;
 import com.example.paulo.myvideogamelist.models.GameList;
 import com.example.paulo.myvideogamelist.models.GameList_;
@@ -29,6 +30,7 @@ public class DataBaseService {
     Box<ListGame> listGameBox;
     Box<Game> gameBox;
     Box<Review> reviewBox;
+    Box<Developer> developerBox;
 
 
     public DataBaseService(AuthService authService, BoxStore boxStore) {
@@ -39,6 +41,7 @@ public class DataBaseService {
         this.listGameBox = boxStore.boxFor(ListGame.class);
         this.gameBox = boxStore.boxFor(Game.class);
         this.reviewBox = boxStore.boxFor(Review.class);
+        this.developerBox = boxStore.boxFor(Developer.class);
     }
 
 
@@ -90,7 +93,13 @@ public class DataBaseService {
 
     }
 
+    public List<Game> getAllDeveloperGames(Developer developer){
+        return gameBox.query().equal(Game_.developerId,developer.id).build().find();
+    }
+
     public List<Game> getAllGames (){
        return gameBox.query().build().find();
     }
+
+    public List<Developer> getAllDevelopers () { return developerBox.query().build().find();}
 }

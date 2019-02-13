@@ -26,7 +26,7 @@
     },
     {
       "id": "2:6759760646904187970",
-      "lastPropertyId": "4:1957590057467545554",
+      "lastPropertyId": "5:7905215735092905879",
       "name": "Game",
       "properties": [
         {
@@ -45,6 +45,11 @@
         {
           "id": "4:1957590057467545554",
           "name": "releaseDate"
+        },
+        {
+          "id": "5:7905215735092905879",
+          "indexId": "14:4141881174222064347",
+          "name": "developerId"
         }
       ],
       "relations": []
@@ -121,10 +126,30 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "9:7134131661758812256",
+      "lastPropertyId": "3:903980529473494358",
+      "name": "Developer",
+      "properties": [
+        {
+          "id": "1:1688548148677350367",
+          "name": "id"
+        },
+        {
+          "id": "2:3965924535918285700",
+          "name": "name"
+        },
+        {
+          "id": "3:903980529473494358",
+          "name": "description"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "8:7496048709120993701",
-  "lastIndexId": "13:5514157524067539392",
+  "lastEntityId": "9:7134131661758812256",
+  "lastIndexId": "14:4141881174222064347",
   "lastRelationId": "1:3102623786864218468",
   "lastSequenceId": "0:0",
   "modelVersion": 4,

@@ -5,6 +5,7 @@ import java.util.Date;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.annotation.Unique;
+import io.objectbox.relation.ToOne;
 
 @Entity
 public class Game {
@@ -14,8 +15,15 @@ public class Game {
     private String title ;
     private String description;
     private Date releaseDate;
+    public ToOne<Developer> developer;
 
     public Game() {
+    }
+
+    public Game(String title, String description,Developer developer) {
+        this.title = title;
+        this.description = description;
+        this.developer.setTarget(developer);
     }
 
     public Game(String title, String description) {
@@ -61,5 +69,11 @@ public class Game {
         this.releaseDate = releaseDate;
     }
 
+    public Developer getDeveloper() {
+        return developer.getTarget();
+    }
 
+    public void setDeveloper(Developer developer) {
+        this.developer.setTarget(developer);
+    }
 }

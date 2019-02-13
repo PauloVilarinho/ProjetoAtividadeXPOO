@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.paulo.myvideogamelist.adapters.GameListAdapter;
+import com.example.paulo.myvideogamelist.models.Developer;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         app = (App)getApplication();
+
 
         setupActionBar();
         setupRecyclerView();

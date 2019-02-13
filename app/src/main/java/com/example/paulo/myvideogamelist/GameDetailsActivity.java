@@ -2,6 +2,7 @@ package com.example.paulo.myvideogamelist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     TextView gameTitle;
     TextView gameDescription;
     TextView gameAverageScore;
+    TextView gameDeveloperName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         gameTitle = findViewById(R.id.gameDetailTitle);
         gameDescription = findViewById(R.id.gameDetailDescription);
         gameAverageScore = findViewById(R.id.gameDetailAverageScore);
+        gameDeveloperName = findViewById(R.id.gameDeveloperName);
 
 
         gameTitle.setText(game.getTitle());
@@ -87,6 +90,18 @@ public class GameDetailsActivity extends AppCompatActivity {
         float averageScore = getAverageScore();
 
         gameAverageScore.setText(Float.toString(averageScore));
+        gameDeveloperName.setText(game.getDeveloper().getName());
+        gameDeveloperName.setTextColor(Color.BLUE);
+
+        gameDeveloperName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),DeveloperListGameActivity.class);
+                intent.putExtra("developerid",game.getDeveloper().id);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

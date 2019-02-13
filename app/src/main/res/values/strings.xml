@@ -22,4 +22,5 @@
     <string name="score">Score :</string>
     <string name="submit">Submit</string>
     <string name="avarage_score">Avarage Score</string>
+    <string name="developer">Developer</string>
 </resources>
