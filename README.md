@@ -31,6 +31,14 @@ Aplicativo para criar uma comunidade de reviews de jogos onde as pessoas podem e
     - id
     - title
     - description
+    - developer
+  - Métodos
+    - getters e setters.
+- **Developer**
+  - Atributos
+    - id
+    - name
+    - description
   - Métodos
     - getters e setters.
 - **Review**
@@ -43,11 +51,11 @@ Aplicativo para criar uma comunidade de reviews de jogos onde as pessoas podem e
   - Métodos
     - getters e setters.
 ## Relacionamentos
-O usuário ao entrar no aplicativo tem a capacidade de criar suas listas de jogos, os separando e organizando-as em categorias que desejar. Alem disso todos os usuários podem deixar reviews nos jogos para expor seus pensamentos sobre o jogo para o resto da comunidade
+O usuário ao entrar no aplicativo tem a capacidade de criar suas listas de jogos, os separando e organizando-as em categorias que desejar. Alem disso todos os usuários podem deixar reviews nos jogos para expor seus pensamentos sobre o jogo para o resto da comunidade. Todo jogo tambem tem um desenvolvedor. 
 ## Persistência de dados
 Atualmente utilizando object box.
 ## Diagrama de Classe simplificado
-![](diagram2.png	)
+![](diagram3.png	)
 ## Funcionalidades
 - Cadastrar novo usuário ou entrar em uma conta já existente;
 - Criar, editar e excluir uma lista;
